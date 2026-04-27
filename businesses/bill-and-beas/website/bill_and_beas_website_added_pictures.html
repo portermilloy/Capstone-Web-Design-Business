@@ -1,0 +1,519 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Bill & Bea's Drive-In & Espresso | Centralia, WA</title>
+<meta name="description" content="Bill & Bea's Drive-In & Espresso — serving Centralia and Lewis County for over 50 years. Burgers, breakfast, milkshakes, and more at 1215 Harrison Ave.">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect width='100' height='100' rx='18' fill='%23c0392b'/><text y='.9em' font-size='62' x='50%' text-anchor='middle' font-family='Georgia,serif' fill='white' font-weight='bold'>B</text></svg>">
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  :root {
+    --red: #c0392b;
+    --cream: #fdf6ec;
+    --brown: #5c3317;
+    --tan: #f0e0c8;
+    --dark: #2c1a0e;
+    --white: #fff;
+  }
+  html { scroll-behavior: smooth; }
+  body { font-family: Georgia, serif; background: var(--cream); color: var(--dark); }
+
+  /* NAV */
+  nav {
+    background: var(--red);
+    position: sticky; top: 0; z-index: 100;
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 0 2rem;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.3);
+  }
+  .nav-logo { color: var(--white); font-size: 1.3rem; font-weight: bold; padding: 1rem 0; letter-spacing: 1px; }
+  .nav-links { display: flex; gap: 1.5rem; list-style: none; }
+  .nav-links a { color: var(--white); text-decoration: none; font-size: 0.95rem; font-family: Arial, sans-serif; letter-spacing: 0.5px; padding: 1.2rem 0; display: block; border-bottom: 2px solid transparent; transition: border-color 0.2s; }
+  .nav-links a:hover { border-bottom-color: var(--white); }
+  .nav-toggle { display: none; background: none; border: none; cursor: pointer; }
+  .nav-toggle span { display: block; width: 24px; height: 2px; background: white; margin: 5px 0; }
+
+  /* HERO */
+  .hero {
+    background: linear-gradient(rgba(44,26,14,0.55), rgba(44,26,14,0.65)),
+      url('https://lh3.googleusercontent.com/gps-cs-s/APNQkAHF8NQONC_R-Yr6Kc_QaT4E7h3wQU1h32qBoHLlvgHD9BUaL2CORaWdyNHEymNlQYVNwZPLtVC_KG_wJvbMP9KPAypkzIkGAnsdDcda8n6d6k5lUFhq7g4c4iCq8z9jaJnZFXa8ly5dbtra=s1360-w1360-h1020-rw') center/cover no-repeat;
+    min-height: 90vh;
+    display: flex; align-items: center; justify-content: center; text-align: center;
+    padding: 2rem;
+  }
+  .hero-inner { max-width: 700px; }
+  .hero h1 { font-size: clamp(2.5rem, 6vw, 4.5rem); color: var(--white); line-height: 1.1; text-shadow: 2px 2px 8px rgba(0,0,0,0.6); }
+  .hero h1 span { color: #f5c842; }
+  .hero p { color: #f5e6d0; font-size: 1.2rem; margin: 1.2rem 0 2rem; line-height: 1.6; }
+  .hero-badges { display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap; margin-bottom: 2rem; }
+  .badge { background: rgba(255,255,255,0.15); border: 1px solid rgba(255,255,255,0.4); color: white; padding: 0.4rem 1rem; border-radius: 20px; font-family: Arial, sans-serif; font-size: 0.85rem; }
+  .btn { display: inline-block; background: var(--red); color: white; padding: 0.9rem 2rem; border-radius: 4px; text-decoration: none; font-family: Arial, sans-serif; font-weight: bold; letter-spacing: 1px; margin: 0.4rem; transition: background 0.2s, transform 0.1s; }
+  .btn:hover { background: #a93226; transform: translateY(-1px); }
+  .btn-outline { background: transparent; border: 2px solid white; }
+  .btn-outline:hover { background: rgba(255,255,255,0.15); }
+
+  /* SECTIONS */
+  section { padding: 5rem 1.5rem; }
+  .section-title { text-align: center; font-size: clamp(1.8rem, 4vw, 2.5rem); color: var(--red); margin-bottom: 0.5rem; }
+  .section-sub { text-align: center; color: #7a5c3a; font-family: Arial, sans-serif; font-size: 0.95rem; margin-bottom: 3rem; }
+  .divider { text-align: center; color: var(--red); font-size: 1.4rem; margin-bottom: 1rem; letter-spacing: 4px; }
+
+  /* ABOUT */
+  .about { background: var(--white); }
+  .about-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 3rem; max-width: 1000px; margin: 0 auto; align-items: center; }
+  .about-text p { font-size: 1.05rem; line-height: 1.8; color: #4a3020; margin-bottom: 1rem; }
+  .about-img img { width: 100%; border-radius: 8px; box-shadow: 0 4px 20px rgba(0,0,0,0.15); }
+  .about-stats { display: flex; gap: 1.5rem; margin-top: 1.5rem; flex-wrap: wrap; }
+  .stat { text-align: center; }
+  .stat-num { font-size: 2rem; color: var(--red); font-weight: bold; }
+  .stat-label { font-family: Arial, sans-serif; font-size: 0.8rem; color: #7a5c3a; }
+
+  /* GALLERY */
+  .gallery { background: var(--tan); }
+  .gallery-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(220px, 1fr)); gap: 0.75rem; max-width: 1100px; margin: 0 auto; }
+  .gallery-grid img { width: 100%; height: 200px; object-fit: cover; border-radius: 6px; transition: transform 0.2s, box-shadow 0.2s; cursor: pointer; }
+  .gallery-grid img:hover { transform: scale(1.03); box-shadow: 0 6px 20px rgba(0,0,0,0.2); }
+
+  /* MENU */
+  .menu { background: var(--cream); }
+  .menu-tabs { display: flex; gap: 0.5rem; justify-content: center; flex-wrap: wrap; margin-bottom: 2.5rem; }
+  .tab-btn { background: var(--white); border: 2px solid var(--red); color: var(--red); padding: 0.5rem 1.3rem; border-radius: 20px; font-family: Arial, sans-serif; font-size: 0.9rem; cursor: pointer; transition: all 0.2s; }
+  .tab-btn.active, .tab-btn:hover { background: var(--red); color: white; }
+  .menu-panel { display: none; max-width: 1000px; margin: 0 auto; }
+  .menu-panel.active { display: block; }
+  .menu-section-title { font-size: 1.4rem; color: var(--red); border-bottom: 2px solid var(--tan); padding-bottom: 0.5rem; margin: 2rem 0 1rem; text-align: center; }
+  .menu-items { display: grid; grid-template-columns: 1fr 1fr; gap: 0.4rem 2rem; }
+  .menu-item { display: flex; justify-content: space-between; padding: 0.35rem 0; border-bottom: 1px dotted #d4b896; font-family: Arial, sans-serif; font-size: 0.92rem; }
+  .menu-item-name { color: var(--dark); }
+  .menu-item-price { color: var(--red); font-weight: bold; min-width: 40px; text-align: right; }
+  .menu-note { text-align: center; font-family: Arial, sans-serif; font-size: 0.85rem; color: #7a5c3a; margin-top: 1.5rem; font-style: italic; }
+  .menu-cols { display: grid; grid-template-columns: 1fr 1fr; gap: 0 3rem; }
+
+  /* HOURS */
+  .hours-section { background: var(--red); color: white; }
+  .hours-section .section-title { color: white; }
+  .hours-section .section-sub { color: rgba(255,255,255,0.8); }
+  .hours-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 3rem; max-width: 900px; margin: 0 auto; }
+  .hours-table { background: rgba(255,255,255,0.12); border-radius: 8px; padding: 2rem; }
+  .hours-table h3 { font-size: 1.2rem; margin-bottom: 1.2rem; color: #f5c842; }
+  .hours-row { display: flex; justify-content: space-between; padding: 0.5rem 0; border-bottom: 1px solid rgba(255,255,255,0.15); font-family: Arial, sans-serif; font-size: 0.95rem; }
+  .hours-row:last-child { border-bottom: none; }
+  .hours-row.closed .hours-time { color: rgba(255,255,255,0.5); }
+  .contact-info { background: rgba(255,255,255,0.12); border-radius: 8px; padding: 2rem; }
+  .contact-info h3 { font-size: 1.2rem; margin-bottom: 1.2rem; color: #f5c842; }
+  .contact-line { display: flex; align-items: flex-start; gap: 0.75rem; margin-bottom: 1rem; font-family: Arial, sans-serif; font-size: 0.95rem; line-height: 1.5; }
+  .contact-icon { font-size: 1.1rem; margin-top: 2px; }
+  .contact-info a { color: white; text-decoration: underline; }
+  .map-embed { margin-top: 1.5rem; border-radius: 8px; overflow: hidden; }
+  .map-embed iframe { width: 100%; height: 200px; border: none; border-radius: 8px; }
+
+  /* REVIEWS */
+  .reviews { background: var(--white); }
+  .reviews-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 1.5rem; max-width: 1000px; margin: 0 auto; }
+  .review-card { background: var(--cream); border-radius: 8px; padding: 1.5rem; border-left: 4px solid var(--red); }
+  .review-stars { color: #f5c842; font-size: 1.1rem; margin-bottom: 0.5rem; }
+  .review-text { font-size: 0.95rem; line-height: 1.7; color: #4a3020; margin-bottom: 0.75rem; font-style: italic; }
+  .review-author { font-family: Arial, sans-serif; font-size: 0.85rem; color: #7a5c3a; font-weight: bold; }
+
+  /* FACEBOOK CTA */
+  .fb-cta { background: var(--tan); text-align: center; padding: 4rem 1.5rem; }
+  .fb-cta h2 { font-size: 1.8rem; color: var(--brown); margin-bottom: 0.75rem; }
+  .fb-cta p { color: #7a5c3a; font-family: Arial, sans-serif; margin-bottom: 1.5rem; max-width: 500px; margin-left: auto; margin-right: auto; }
+  .btn-fb { background: #1877f2; color: white; display: inline-flex; align-items: center; gap: 0.5rem; }
+  .btn-fb:hover { background: #1465d8; }
+
+  /* FOOTER */
+  footer { background: var(--dark); color: rgba(255,255,255,0.7); text-align: center; padding: 2rem; font-family: Arial, sans-serif; font-size: 0.85rem; }
+  footer a { color: rgba(255,255,255,0.6); }
+
+  /* RESPONSIVE */
+  @media (max-width: 700px) {
+    .nav-links { display: none; flex-direction: column; position: absolute; top: 56px; left: 0; right: 0; background: var(--red); padding: 1rem 2rem; }
+    .nav-links.open { display: flex; }
+    .nav-toggle { display: block; }
+    .about-grid, .hours-grid, .menu-cols { grid-template-columns: 1fr; }
+    .menu-items { grid-template-columns: 1fr; }
+    nav { position: relative; }
+  }
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="nav-logo">Bill & Bea's</div>
+  <ul class="nav-links" id="navLinks">
+    <li><a href="#about">About</a></li>
+    <li><a href="#menu">Menu</a></li>
+    <li><a href="#gallery">Gallery</a></li>
+    <li><a href="#reviews">Reviews</a></li>
+    <li><a href="#hours">Hours & Location</a></li>
+  </ul>
+  <button class="nav-toggle" onclick="document.getElementById('navLinks').classList.toggle('open')" aria-label="Menu">
+    <span></span><span></span><span></span>
+  </button>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-inner">
+    <h1>Bill & <span>Bea's</span><br>Drive-In & Espresso</h1>
+    <p>Serving Centralia and Lewis County for over 50 years.<br>Burgers, breakfast, shakes, and espresso — made the way you remember.</p>
+    <div class="hero-badges">
+      <span class="badge">⭐ 4.7 Stars on Google</span>
+      <span class="badge">🍔 50+ Years Local</span>
+      <span class="badge">☕ Espresso & Shakes</span>
+      <span class="badge">🚗 Curbside Pickup</span>
+    </div>
+    <a href="#menu" class="btn">See Our Menu</a>
+    <a href="#hours" class="btn btn-outline">Hours & Location</a>
+  </div>
+</section>
+
+<!-- ABOUT -->
+<section class="about" id="about">
+  <div class="divider">✦ ✦ ✦</div>
+  <h2 class="section-title">A Centralia Original</h2>
+  <p class="section-sub">Family-owned. Community loved. Over half a century in the making.</p>
+  <div class="about-grid">
+    <div class="about-text">
+      <p>Bill & Bea's Drive-In has been a fixture of Centralia, Washington since the early 1970s — a place where the burgers are made fresh, the milkshakes come in a dozen flavors, and the staff knows your name.</p>
+      <p>Whether you're swinging through for a quick espresso in the morning or settling in for a full burger basket with the family, you'll find the same honest, no-fuss food that's kept locals coming back for generations.</p>
+      <p>We're not a chain. We're your neighbor.</p>
+      <div class="about-stats">
+        <div class="stat"><div class="stat-num">50+</div><div class="stat-label">Years Serving<br>Centralia</div></div>
+        <div class="stat"><div class="stat-num">4.7★</div><div class="stat-label">Google<br>Rating</div></div>
+        <div class="stat"><div class="stat-num">372</div><div class="stat-label">Customer<br>Reviews</div></div>
+      </div>
+    </div>
+    <div class="about-img">
+    <img src="https://lh3.googleusercontent.com/gps-cs-s/APNQkAHF8NQONC_R-Yr6Kc_QaT4E7h3wQU1h32qBoHLlvgHD9BUaL2CORaWdyNHEymNlQYVNwZPLtVC_KG_wJvbMP9KPAypkzIkGAnsdDcda8n6d6k5lUFhq7g4c4iCq8z9jaJnZFXa8ly5dbtra=s1360-w1360-h1020-rw" alt="Bill and Bea's Drive-In exterior" onerror="this.src='https://placehold.co/600x400/c0392b/white?text=Bill+%26+Bea%27s'">
+    </div>
+  </div>
+</section>
+
+<!-- GALLERY -->
+<section class="gallery" id="gallery">
+  <div class="divider">✦ ✦ ✦</div>
+  <h2 class="section-title">A Look Inside</h2>
+  <p class="section-sub">Real food, real atmosphere — just like you remember.</p>
+  <div class="gallery-grid">
+    <img src="https://lh3.googleusercontent.com/gps-cs-s/APNQkAHF8NQONC_R-Yr6Kc_QaT4E7h3wQU1h32qBoHLlvgHD9BUaL2CORaWdyNHEymNlQYVNwZPLtVC_KG_wJvbMP9KPAypkzIkGAnsdDcda8n6d6k5lUFhq7g4c4iCq8z9jaJnZFXa8ly5dbtra=s1360-w1360-h1020-rw" alt="Bill and Bea's exterior" onerror="this.src='https://placehold.co/400x300/c0392b/white?text=Exterior'">
+    <img src="https://lh3.googleusercontent.com/gps-cs-s/APNQkAFJqNRNHWFmU9MEIG00pkHLMZh5hMQKAVdtUuvdp2McQrH2BZCVzS5YVaYst5S3r5qAeVY4JlAYn9iNtYFJB3AOTnsDTmTUtq-VvnigJ9P5FowVUSeEMIfA_xrH_4L8BP9IYZQU=s1360-w1360-h1020-rw" alt="Diner interior" onerror="this.src='https://placehold.co/400x300/5c3317/white?text=Interior'">
+    <img src="https://lh3.googleusercontent.com/gps-cs-s/APNQkAGY6t3KyJ2yQ5N8ThqCGclEqe2HszeMJNDi3i4CpSmBqEt4SRpAtWmAzUyaj_E6CpJof2soX5La1bf3s8k3rt1tyIiVSwbnHU4LqH8O_hvWWMHK567aCUIB9GetedFMvcb3CZOn=s1360-w1360-h1020-rw" alt="Burger and fries" onerror="this.src='https://placehold.co/400x300/f0e0c8/5c3317?text=Burgers+%26+Fries'">
+    <img src="https://lh3.googleusercontent.com/gps-cs-s/APNQkAE_cUelCMIiOnnvypL5A-LjNg17QOz5HtAChg9yafR2gCl6YbWNjx0fRHIjr8aBE_vWcWvmDLF1tPLJe8jIhIQ-p99GpnlK29VGyICSmL2ScrAJK1GgnM1F-GQxWOZLXVJg7I2JLQ=s1360-w1360-h1020-rw" alt="Breakfast plate" onerror="this.src='https://placehold.co/400x300/c0392b/white?text=Breakfast'">
+    <img src="https://lh3.googleusercontent.com/gps-cs-s/APNQkAE1CnPxIil47CXO3Xt558XaY-zhA2ROhH0W8E1gYKm9FKs-2b6yZcaoXzl75HOKkGlyBbVxf-tKqA256e32ak6xUCZcaz_BZwJQ4WpD8Qy7Sx-4gOeLaXMMhkKKn6SwBmPlUD7P6PZYkmEZ=s1360-w1360-h1020-rw" alt="Chicken strips and fries" onerror="this.src='https://placehold.co/400x300/5c3317/white?text=Chicken+Strips'">
+    <img src="https://lh3.googleusercontent.com/gps-cs-s/APNQkAENbkXFBPnM6RhCT3WAShIPmgeTatHwTIthbqxfGDmtx8CdkYj9OOnwxPfRk5dvTxBOPYZlgGC1k7DSigSzdl0ymEUZB0bcDlcbV7U7dG8DLr-YLGX3nohAvhXMgN_1xNyNfLeRLA=s1360-w1360-h1020-rw" alt="Sandwich" onerror="this.src='https://placehold.co/400x300/f0e0c8/5c3317?text=Sandwich'">
+  </div>
+</section>
+
+<!-- MENU -->
+<section class="menu" id="menu">
+  <div class="divider">✦ ✦ ✦</div>
+  <h2 class="section-title">Our Menu</h2>
+  <p class="section-sub">Made fresh, every order. Breakfast served 8–10:30 AM daily.</p>
+
+  <div class="menu-tabs">
+    <button class="tab-btn active" onclick="showTab('burgers', this)">Burgers</button>
+    <button class="tab-btn" onclick="showTab('sandwiches', this)">Sandwiches</button>
+    <button class="tab-btn" onclick="showTab('baskets', this)">Baskets</button>
+    <button class="tab-btn" onclick="showTab('dogs', this)">Dogs & Soups</button>
+    <button class="tab-btn" onclick="showTab('combos', this)">Combos</button>
+    <button class="tab-btn" onclick="showTab('sides', this)">Sides & Drinks</button>
+    <button class="tab-btn" onclick="showTab('breakfast', this)">Breakfast</button>
+  </div>
+
+  <!-- BURGERS -->
+  <div class="menu-panel active" id="tab-burgers">
+    <div class="menu-section-title">Burgers</div>
+    <div class="menu-cols">
+      <div>
+        <div class="menu-items">
+          <div class="menu-item"><span class="menu-item-name">Junior</span><span class="menu-item-price">$4.40</span></div>
+          <div class="menu-item"><span class="menu-item-name">Junior Deluxe</span><span class="menu-item-price">$4.65</span></div>
+          <div class="menu-item"><span class="menu-item-name">Junior Cheese</span><span class="menu-item-price">$4.65</span></div>
+          <div class="menu-item"><span class="menu-item-name">Junior Deluxe Cheese</span><span class="menu-item-price">$4.95</span></div>
+          <div class="menu-item"><span class="menu-item-name">Junior Bacon</span><span class="menu-item-price">$6.25</span></div>
+          <div class="menu-item"><span class="menu-item-name">Junior Bacon Cheese</span><span class="menu-item-price">$6.50</span></div>
+          <div class="menu-item"><span class="menu-item-name">Regular</span><span class="menu-item-price">$6.00</span></div>
+          <div class="menu-item"><span class="menu-item-name">Deluxe</span><span class="menu-item-price">$6.25</span></div>
+          <div class="menu-item"><span class="menu-item-name">Cheese</span><span class="menu-item-price">$6.25</span></div>
+          <div class="menu-item"><span class="menu-item-name">Deluxe Cheese</span><span class="menu-item-price">$6.25</span></div>
+          <div class="menu-item"><span class="menu-item-name">Jumbo</span><span class="menu-item-price">$6.70</span></div>
+        </div>
+      </div>
+      <div>
+        <div class="menu-items">
+          <div class="menu-item"><span class="menu-item-name">Jumbo Deluxe</span><span class="menu-item-price">$7.10</span></div>
+          <div class="menu-item"><span class="menu-item-name">Jumbo Cheese</span><span class="menu-item-price">$7.10</span></div>
+          <div class="menu-item"><span class="menu-item-name">Jumbo Deluxe Cheese</span><span class="menu-item-price">$7.50</span></div>
+          <div class="menu-item"><span class="menu-item-name">Jumbo Bacon Cheese</span><span class="menu-item-price">$9.25</span></div>
+          <div class="menu-item"><span class="menu-item-name">Bacon Burger</span><span class="menu-item-price">$8.25</span></div>
+          <div class="menu-item"><span class="menu-item-name">Bacon Cheese</span><span class="menu-item-price">$8.50</span></div>
+          <div class="menu-item"><span class="menu-item-name">Mushroom Cheeseburger</span><span class="menu-item-price">$7.50</span></div>
+          <div class="menu-item"><span class="menu-item-name">Bacon Mushroom Cheese</span><span class="menu-item-price">$9.00</span></div>
+          <div class="menu-item"><span class="menu-item-name">BBQ Bac Mushroom Chz</span><span class="menu-item-price">$9.25</span></div>
+          <div class="menu-item"><span class="menu-item-name">"Ham" Burger</span><span class="menu-item-price">$7.75</span></div>
+          <div class="menu-item"><span class="menu-item-name">Double Burger</span><span class="menu-item-price">$6.75</span></div>
+          <div class="menu-item"><span class="menu-item-name">Double Cheeseburger</span><span class="menu-item-price">$7.50</span></div>
+          <div class="menu-item"><span class="menu-item-name">Double Deluxe Cheese</span><span class="menu-item-price">$7.75</span></div>
+          <div class="menu-item"><span class="menu-item-name">Double Bacon Cheese</span><span class="menu-item-price">$9.75</span></div>
+          <div class="menu-item"><span class="menu-item-name">Chili Burger</span><span class="menu-item-price">$7.50</span></div>
+        </div>
+      </div>
+    </div>
+    <div class="menu-section-title">Add Ons</div>
+    <div class="menu-items" style="max-width:400px;margin:0 auto;">
+      <div class="menu-item"><span class="menu-item-name">Jr. Patty</span><span class="menu-item-price">$1.00</span></div>
+      <div class="menu-item"><span class="menu-item-name">Regular Patty</span><span class="menu-item-price">$1.50</span></div>
+      <div class="menu-item"><span class="menu-item-name">Jumbo Patty</span><span class="menu-item-price">$2.00</span></div>
+      <div class="menu-item"><span class="menu-item-name">Mushrooms</span><span class="menu-item-price">$1.00</span></div>
+      <div class="menu-item"><span class="menu-item-name">Bacon</span><span class="menu-item-price">$1.75</span></div>
+      <div class="menu-item"><span class="menu-item-name">Cheese</span><span class="menu-item-price">$1.25</span></div>
+    </div>
+  </div>
+
+  <!-- SANDWICHES -->
+  <div class="menu-panel" id="tab-sandwiches">
+    <div class="menu-section-title">Sandwiches</div>
+    <div class="menu-items" style="max-width:600px;margin:0 auto;">
+      <div class="menu-item"><span class="menu-item-name">Grilled Cheese</span><span class="menu-item-price">$4.50</span></div>
+      <div class="menu-item"><span class="menu-item-name">Grilled Chicken</span><span class="menu-item-price">$7.00</span></div>
+      <div class="menu-item"><span class="menu-item-name">Chicken Supreme</span><span class="menu-item-price">$7.00</span></div>
+      <div class="menu-item"><span class="menu-item-name">Fish Sandwich</span><span class="menu-item-price">$6.50</span></div>
+      <div class="menu-item"><span class="menu-item-name">Ham & Cheese on French</span><span class="menu-item-price">$7.00</span></div>
+      <div class="menu-item"><span class="menu-item-name">B.L.T.</span><span class="menu-item-price">$7.75</span></div>
+      <div class="menu-item"><span class="menu-item-name">Grilled Cheese & Bacon w/ Tomato</span><span class="menu-item-price">$7.75</span></div>
+      <div class="menu-item"><span class="menu-item-name">Burger Dip or French Dip</span><span class="menu-item-price">$7.00</span></div>
+      <div class="menu-item"><span class="menu-item-name">Patty Melt</span><span class="menu-item-price">$7.00</span></div>
+    </div>
+  </div>
+
+  <!-- BASKETS -->
+  <div class="menu-panel" id="tab-baskets">
+    <div class="menu-section-title">Baskets <small style="font-size:0.75rem;color:#7a5c3a;">(includes fries or tots & choice of sauce)</small></div>
+    <div class="menu-items" style="max-width:500px;margin:0 auto;">
+      <div class="menu-item"><span class="menu-item-name">Fish & Chips</span><span class="menu-item-price">$14.00</span></div>
+      <div class="menu-item"><span class="menu-item-name">Prawns</span><span class="menu-item-price">$14.00</span></div>
+      <div class="menu-item"><span class="menu-item-name">Chicken Strips</span><span class="menu-item-price">$14.00</span></div>
+      <div class="menu-item"><span class="menu-item-name">Clam Strips</span><span class="menu-item-price">$12.25</span></div>
+      <div class="menu-item"><span class="menu-item-name">Ginger Steaks</span><span class="menu-item-price">$12.25</span></div>
+    </div>
+    <div class="menu-section-title" style="margin-top:2rem;">Extras</div>
+    <div class="menu-items" style="max-width:400px;margin:0 auto;">
+      <div class="menu-item"><span class="menu-item-name">Sauce</span><span class="menu-item-price">$.50</span></div>
+      <div class="menu-item"><span class="menu-item-name">Cheese</span><span class="menu-item-price">$1.25</span></div>
+      <div class="menu-item"><span class="menu-item-name">Tar</span><span class="menu-item-price">$.50</span></div>
+      <div class="menu-item"><span class="menu-item-name">Ranch</span><span class="menu-item-price">$.50</span></div>
+    </div>
+  </div>
+
+  <!-- DOGS & SOUPS -->
+  <div class="menu-panel" id="tab-dogs">
+    <div class="menu-cols">
+      <div>
+        <div class="menu-section-title">Dogs</div>
+        <div class="menu-items">
+          <div class="menu-item"><span class="menu-item-name">Hot Dog</span><span class="menu-item-price">$5.00</span></div>
+          <div class="menu-item"><span class="menu-item-name">Foot Long Hot Dog</span><span class="menu-item-price">$6.50</span></div>
+          <div class="menu-item"><span class="menu-item-name">Chili Dog</span><span class="menu-item-price">$6.25</span></div>
+          <div class="menu-item"><span class="menu-item-name">Foot Long Chili Dog</span><span class="menu-item-price">$8.00</span></div>
+          <div class="menu-item"><span class="menu-item-name">Mini Corn Dogs</span><span class="menu-item-price">$9.00</span></div>
+        </div>
+      </div>
+      <div>
+        <div class="menu-section-title">Soups</div>
+        <div class="menu-items">
+          <div class="menu-item"><span class="menu-item-name">Cup</span><span class="menu-item-price">$4.00</span></div>
+          <div class="menu-item"><span class="menu-item-name">Bowl</span><span class="menu-item-price">$5.25</span></div>
+          <div class="menu-item"><span class="menu-item-name">Chowder — Cup</span><span class="menu-item-price">$4.50</span></div>
+          <div class="menu-item"><span class="menu-item-name">Chowder — Bowl</span><span class="menu-item-price">$6.00</span></div>
+          <div class="menu-item"><span class="menu-item-name">Chili — Cup</span><span class="menu-item-price">$4.25</span></div>
+          <div class="menu-item"><span class="menu-item-name">Chili — Bowl</span><span class="menu-item-price">$5.50</span></div>
+        </div>
+        <p class="menu-note">Chowder available Fridays only</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- COMBOS -->
+  <div class="menu-panel" id="tab-combos">
+    <div class="menu-section-title">Combos <small style="font-size:0.75rem;color:#7a5c3a;">(includes fries or tots & medium soft drink — add $2.00 for milkshake)</small></div>
+    <div class="menu-items" style="max-width:650px;margin:0 auto;">
+      <div class="menu-item"><span class="menu-item-name">#1 Junior Deluxe Cheeseburger</span><span class="menu-item-price">$12.50</span></div>
+      <div class="menu-item"><span class="menu-item-name">#2 Deluxe Cheeseburger</span><span class="menu-item-price">$13.50</span></div>
+      <div class="menu-item"><span class="menu-item-name">#3 Bacon Cheeseburger</span><span class="menu-item-price">$15.00</span></div>
+      <div class="menu-item"><span class="menu-item-name">#4 Jumbo Deluxe Cheese</span><span class="menu-item-price">$14.50</span></div>
+      <div class="menu-item"><span class="menu-item-name">#5 Jumbo Bacon Cheeseburger</span><span class="menu-item-price">$16.00</span></div>
+      <div class="menu-item"><span class="menu-item-name">#6 Mushroom 'n Swiss Burger</span><span class="menu-item-price">$14.00</span></div>
+      <div class="menu-item"><span class="menu-item-name">#7 Grilled Chicken Sandwich</span><span class="menu-item-price">$13.50</span></div>
+    </div>
+  </div>
+
+  <!-- SIDES & DRINKS -->
+  <div class="menu-panel" id="tab-sides">
+    <div class="menu-cols">
+      <div>
+        <div class="menu-section-title">Sides</div>
+        <div class="menu-items">
+          <div class="menu-item"><span class="menu-item-name">Fries</span><span class="menu-item-price">$4.75</span></div>
+          <div class="menu-item"><span class="menu-item-name">Tater Tots</span><span class="menu-item-price">$4.75</span></div>
+          <div class="menu-item"><span class="menu-item-name">Onion Rings</span><span class="menu-item-price">$5.50</span></div>
+          <div class="menu-item"><span class="menu-item-name">Mushrooms</span><span class="menu-item-price">$4.25</span></div>
+        </div>
+        <div class="menu-section-title" style="margin-top:1.5rem;">Drinks</div>
+        <div class="menu-items">
+          <div class="menu-item"><span class="menu-item-name">Soft Drink — Small</span><span class="menu-item-price">$2.25</span></div>
+          <div class="menu-item"><span class="menu-item-name">Soft Drink — Medium</span><span class="menu-item-price">$3.00</span></div>
+          <div class="menu-item"><span class="menu-item-name">Soft Drink — Large</span><span class="menu-item-price">$3.50</span></div>
+          <div class="menu-item"><span class="menu-item-name">Milk</span><span class="menu-item-price">$2.75–$4.00</span></div>
+          <div class="menu-item"><span class="menu-item-name">Hot Chocolate</span><span class="menu-item-price">$2.00</span></div>
+          <div class="menu-item"><span class="menu-item-name">Coffee or Tea</span><span class="menu-item-price">$2.00</span></div>
+          <div class="menu-item"><span class="menu-item-name">Floats</span><span class="menu-item-price">$5.00</span></div>
+        </div>
+        <p class="menu-note">Pepsi · Diet Pepsi · Root Beer · Mt. Dew · Dr. Pepper · Lemonade · Sierra Mist</p>
+      </div>
+      <div>
+        <div class="menu-section-title">Milkshakes & Malts</div>
+        <div class="menu-items">
+          <div class="menu-item"><span class="menu-item-name">Small Shake</span><span class="menu-item-price">$4.50</span></div>
+          <div class="menu-item"><span class="menu-item-name">Medium Shake</span><span class="menu-item-price">$6.50</span></div>
+          <div class="menu-item"><span class="menu-item-name">Malt (add)</span><span class="menu-item-price">+$.50</span></div>
+          <div class="menu-item"><span class="menu-item-name">Extra Flavor</span><span class="menu-item-price">+$.50</span></div>
+        </div>
+        <p class="menu-note" style="text-align:left;margin-top:0.75rem;">Chocolate · Vanilla · Cherry · Strawberry · Banana · Orange · Raspberry · Peanut Butter · Blackberry · Hot Fudge · Caramel · Butterscotch · Pineapple · Marshmallow · Root Beer</p>
+        <div class="menu-section-title" style="margin-top:1.5rem;">Desserts & Ice Cream</div>
+        <div class="menu-items">
+          <div class="menu-item"><span class="menu-item-name">Sundaes</span><span class="menu-item-price">$4.50</span></div>
+          <div class="menu-item"><span class="menu-item-name">Banana Split</span><span class="menu-item-price">$7.25</span></div>
+          <div class="menu-item"><span class="menu-item-name">Cone — Small</span><span class="menu-item-price">$2.50</span></div>
+          <div class="menu-item"><span class="menu-item-name">Cone — Medium</span><span class="menu-item-price">$3.00</span></div>
+          <div class="menu-item"><span class="menu-item-name">Cone — Large</span><span class="menu-item-price">$3.25</span></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- BREAKFAST -->
+  <div class="menu-panel" id="tab-breakfast">
+    <p class="menu-note" style="font-size:1rem;margin-bottom:2rem;">🍳 Breakfast served 8:00 AM – 10:30 AM</p>
+    <div class="menu-cols">
+      <div>
+        <div class="menu-section-title">Breakfast Plates</div>
+        <div class="menu-items">
+          <div class="menu-item"><span class="menu-item-name">Two Egg Breakfast</span><span class="menu-item-price">$9.00</span></div>
+          <div class="menu-item"><span class="menu-item-name">Two Egg w/ Meat</span><span class="menu-item-price">$12.00</span></div>
+          <div class="menu-item"><span class="menu-item-name">Ham Scram</span><span class="menu-item-price">$12.00</span></div>
+          <div class="menu-item"><span class="menu-item-name">Archie's Special</span><span class="menu-item-price">$9.50</span></div>
+          <div class="menu-item"><span class="menu-item-name">Chicken Fried Steak</span><span class="menu-item-price">$14.00</span></div>
+          <div class="menu-item"><span class="menu-item-name">2-2-2</span><span class="menu-item-price">$10.00</span></div>
+          <div class="menu-item"><span class="menu-item-name">Belgian Waffle</span><span class="menu-item-price">$10.75</span></div>
+          <div class="menu-item"><span class="menu-item-name">Biscuits & Gravy — Full</span><span class="menu-item-price">$6.50</span></div>
+          <div class="menu-item"><span class="menu-item-name">Biscuits & Gravy — Half</span><span class="menu-item-price">$5.00</span></div>
+          <div class="menu-item"><span class="menu-item-name">Breakfast Burrito</span><span class="menu-item-price">$7.00</span></div>
+          <div class="menu-item"><span class="menu-item-name">Breakfast Sandwich</span><span class="menu-item-price">$5.50</span></div>
+        </div>
+      </div>
+      <div>
+        <div class="menu-section-title">Ala Carte</div>
+        <div class="menu-items">
+          <div class="menu-item"><span class="menu-item-name">Toast or English Muffin</span><span class="menu-item-price">$3.00</span></div>
+          <div class="menu-item"><span class="menu-item-name">Hashbrowns</span><span class="menu-item-price">$5.00</span></div>
+          <div class="menu-item"><span class="menu-item-name">Pancake — One</span><span class="menu-item-price">$3.00</span></div>
+          <div class="menu-item"><span class="menu-item-name">Pancakes — Two</span><span class="menu-item-price">$5.00</span></div>
+          <div class="menu-item"><span class="menu-item-name">Pancakes — Three</span><span class="menu-item-price">$6.50</span></div>
+          <div class="menu-item"><span class="menu-item-name">Side of Ham/Sausage/Bacon</span><span class="menu-item-price">$5.50</span></div>
+          <div class="menu-item"><span class="menu-item-name">Egg — One</span><span class="menu-item-price">$2.00</span></div>
+          <div class="menu-item"><span class="menu-item-name">Eggs — Two</span><span class="menu-item-price">$3.25</span></div>
+          <div class="menu-item"><span class="menu-item-name">Eggs — Three</span><span class="menu-item-price">$4.00</span></div>
+        </div>
+        <div class="menu-section-title" style="margin-top:1.5rem;">Beverages</div>
+        <div class="menu-items">
+          <div class="menu-item"><span class="menu-item-name">Coffee / Hot Cocoa / Tea</span><span class="menu-item-price">$2.00</span></div>
+          <div class="menu-item"><span class="menu-item-name">Milk</span><span class="menu-item-price">$2.75–$3.50</span></div>
+          <div class="menu-item"><span class="menu-item-name">Orange Juice</span><span class="menu-item-price">$2.75–$3.50</span></div>
+        </div>
+      </div>
+    </div>
+    <p class="menu-note" style="margin-top:1.5rem;">**Consuming raw or undercooked eggs may increase risk of foodborne illness**</p>
+  </div>
+</section>
+
+<!-- HOURS & LOCATION -->
+<section class="hours-section" id="hours">
+  <div class="divider" style="color:rgba(255,255,255,0.5);">✦ ✦ ✦</div>
+  <h2 class="section-title">Hours & Location</h2>
+  <p class="section-sub">Come see us — we're easy to find on Harrison Ave.</p>
+  <div class="hours-grid">
+    <div class="hours-table">
+      <h3>🕐 Hours</h3>
+      <div class="hours-row"><span>Monday</span><span class="hours-time">8:00 AM – 8:00 PM</span></div>
+      <div class="hours-row"><span>Tuesday</span><span class="hours-time">8:00 AM – 8:00 PM</span></div>
+      <div class="hours-row"><span>Wednesday</span><span class="hours-time">8:00 AM – 8:00 PM</span></div>
+      <div class="hours-row"><span>Thursday</span><span class="hours-time">8:00 AM – 8:00 PM</span></div>
+      <div class="hours-row"><span>Friday</span><span class="hours-time">8:00 AM – 8:00 PM</span></div>
+      <div class="hours-row"><span>Saturday</span><span class="hours-time">8:00 AM – 8:00 PM</span></div>
+      <div class="hours-row closed"><span>Sunday</span><span class="hours-time">Closed</span></div>
+      <p style="margin-top:1rem;font-size:0.85rem;opacity:0.7;font-family:Arial,sans-serif;">Breakfast served 8:00–10:30 AM · Curbside pickup available</p>
+    </div>
+    <div class="contact-info">
+      <h3>📍 Find Us</h3>
+      <div class="contact-line"><span class="contact-icon">📍</span><span>1215 Harrison Ave<br>Centralia, WA 98531</span></div>
+      <div class="contact-line"><span class="contact-icon">📞</span><span><a href="tel:3607366697">(360) 736-6697</a></span></div>
+      <div class="contact-line"><span class="contact-icon">📘</span><span>      <a href="https://www.facebook.com/BillandBeas/" target="_blank">Follow us on Facebook</a></span></div>
+      <div class="map-embed">
+        <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2734.7822936562316!2d-122.98618848804404!3d46.72975537100239!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x549160676f1e5fe7%3A0x827759ed5092a9fc!2sBill%20%26%20Bea's%20Drive%20In!5e0!3m2!1sen!2sus!4v1776806270044!5m2!1sen!2sus" width="100%" height="200" style="border:0;border-radius:8px;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade" title="Bill and Beas location"></iframe>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- REVIEWS -->
+<section class="reviews" id="reviews">
+  <div class="divider">✦ ✦ ✦</div>
+  <h2 class="section-title">What People Are Saying</h2>
+  <p class="section-sub">4.7 stars on Google · 88% recommend on Facebook</p>
+  <div class="reviews-grid">
+    <div class="review-card">
+      <div class="review-stars">★★★★★</div>
+      <p class="review-text">"This place is a gem. The burgers are fresh, the milkshakes are incredible, and the staff is so friendly. Been coming here for years and it never disappoints."</p>
+      <div class="review-author">— Google Review</div>
+    </div>
+    <div class="review-card">
+      <div class="review-stars">★★★★★</div>
+      <p class="review-text">"Classic drive-in feel with really good food. The fish and chips basket is amazing and the shakes are massive. Prices are fair for the portion sizes you get."</p>
+      <div class="review-author">— Google Review</div>
+    </div>
+    <div class="review-card">
+      <div class="review-stars">★★★★★</div>
+      <p class="review-text">"A true Centralia staple. Love that this place has been here forever. The breakfast is great and the burgers are exactly what you want from a local drive-in."</p>
+      <div class="review-author">— Google Review</div>
+    </div>
+  </div>
+</section>
+
+<!-- FACEBOOK CTA -->
+<div class="fb-cta">
+  <h2>Stay in the Loop</h2>
+  <p>Follow us on Facebook for daily specials, updates, and to connect with our community.</p>
+  <a href="https://www.facebook.com/BillandBeas/" target="_blank" class="btn btn-fb">
+    📘 Find Us on Facebook
+  </a>
+</div>
+
+<!-- FOOTER -->
+<footer>
+  <p>© 2026 Bill & Bea's Drive-In & Espresso · 1215 Harrison Ave, Centralia, WA 98531 · <a href="tel:3607366697">(360) 736-6697</a></p>
+  <p style="margin-top:0.5rem;font-size:0.8rem;">Website by <a href="mailto:milloyporter@gmail.com">Milloy Web Studio</a></p>
+</footer>
+
+<script>
+  function showTab(id, btn) {
+    document.querySelectorAll('.menu-panel').forEach(p => p.classList.remove('active'));
+    document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+    document.getElementById('tab-' + id).classList.add('active');
+    btn.classList.add('active');
+  }
+</script>
+</body>
+</html>
