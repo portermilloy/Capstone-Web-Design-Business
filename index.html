@@ -1,0 +1,496 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Porter Milloy · Web Developer</title>
+  <link href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400;0,600;0,700;1,400;1,600&family=Inter:wght@400;500;600&display=swap" rel="stylesheet"/>
+  <style>
+    :root {
+      --cream:  #f7f3ec;
+      --cream2: #ede9e1;
+      --tan:    #ddd5c5;
+      --dark:   #1a130a;
+      --brown:  #5c3d1e;
+      --mid:    #7a6050;
+      --light:  #b09880;
+      --rust:   #c0532a;
+      --rust2:  #d4673d;
+      --white:  #fffdf9;
+    }
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+    body { background: var(--cream); color: var(--dark); font-family: 'Inter', sans-serif; -webkit-font-smoothing: antialiased; }
+
+    /* NAV */
+    nav {
+      position: sticky; top: 0; z-index: 100;
+      background: rgba(247,243,236,0.96); backdrop-filter: blur(12px);
+      border-bottom: 1px solid var(--tan);
+      padding: 0 48px; height: 62px;
+      display: flex; align-items: center; justify-content: space-between;
+    }
+    .nav-brand {
+      font-family: 'Lora', Georgia, serif; font-size: 17px; font-weight: 700; font-style: italic;
+      color: var(--dark); text-decoration: none; letter-spacing: -0.01em;
+    }
+    .nav-brand span { color: var(--rust); font-style: normal; }
+    .nav-links { display: flex; gap: 32px; list-style: none; }
+    .nav-links a { font-size: 13px; color: var(--mid); text-decoration: none; font-weight: 500; transition: color 0.15s; }
+    .nav-links a:hover { color: var(--dark); }
+    .nav-cta {
+      font-size: 13px; font-weight: 600; color: var(--white);
+      background: var(--rust); padding: 9px 22px; border-radius: 99px;
+      text-decoration: none; transition: background 0.15s;
+    }
+    .nav-cta:hover { background: var(--rust2); }
+    @media(max-width:680px){ nav { padding: 0 20px; } .nav-links { display: none; } }
+
+    /* HERO */
+    .hero {
+      padding: 100px 48px 80px; max-width: 960px; margin: 0 auto; text-align: center;
+    }
+    @media(max-width:680px){ .hero { padding: 64px 20px 60px; } }
+    .hero-kicker {
+      display: inline-flex; align-items: center; gap: 10px;
+      font-size: 13px; font-weight: 500; color: var(--rust);
+      background: rgba(192,83,42,0.08); border: 1px solid rgba(192,83,42,0.2);
+      border-radius: 99px; padding: 6px 18px; margin-bottom: 32px;
+    }
+    .hero-kicker::before { content: ''; width: 6px; height: 6px; border-radius: 50%; background: var(--rust); flex-shrink: 0; }
+    h1 {
+      font-family: 'Lora', Georgia, serif;
+      font-size: clamp(40px, 6vw, 76px); font-weight: 700; line-height: 1.1;
+      letter-spacing: -0.02em; color: var(--dark); margin-bottom: 28px;
+    }
+    h1 em { font-style: italic; color: var(--rust); }
+    .hero-sub {
+      font-size: 18px; color: var(--mid); line-height: 1.78;
+      max-width: 540px; margin: 0 auto 44px; font-weight: 400;
+    }
+    .hero-actions { display: flex; gap: 12px; justify-content: center; flex-wrap: wrap; }
+    .btn {
+      display: inline-block; padding: 13px 30px; border-radius: 99px;
+      font-size: 14px; font-weight: 600; text-decoration: none; transition: all 0.2s; letter-spacing: 0.01em;
+    }
+    .btn-rust { background: var(--rust); color: var(--white); }
+    .btn-rust:hover { background: var(--rust2); transform: translateY(-2px); }
+    .btn-ghost { background: transparent; color: var(--dark); border: 1.5px solid var(--tan); }
+    .btn-ghost:hover { border-color: var(--light); background: var(--cream2); }
+
+    /* DIVIDER */
+    .ornament { text-align: center; padding: 40px 0; color: var(--tan); font-size: 22px; letter-spacing: 12px; }
+
+    /* SECTION */
+    .section { padding: 80px 48px; }
+    @media(max-width:680px){ .section { padding: 60px 20px; } }
+    .section-inner { max-width: 960px; margin: 0 auto; }
+    .section-kicker {
+      font-size: 11px; font-weight: 600; letter-spacing: 0.14em; text-transform: uppercase;
+      color: var(--rust); margin-bottom: 12px; display: flex; align-items: center; gap: 12px;
+    }
+    .section-kicker::before { content: ''; width: 24px; height: 1.5px; background: var(--rust); display: block; flex-shrink: 0; }
+    h2 {
+      font-family: 'Lora', Georgia, serif;
+      font-size: clamp(28px, 4vw, 48px); font-weight: 700;
+      letter-spacing: -0.02em; line-height: 1.15; color: var(--dark); margin-bottom: 12px;
+    }
+    .section-desc { font-size: 15px; color: var(--mid); line-height: 1.75; max-width: 480px; }
+
+    /* PROJECTS */
+    .projects-wrap { display: flex; flex-direction: column; gap: 48px; margin-top: 56px; }
+    .project-card {
+      background: var(--white); border: 1px solid var(--tan);
+      border-radius: 20px; overflow: hidden;
+      box-shadow: 0 2px 16px rgba(90,60,30,0.05);
+      display: grid; grid-template-columns: 1fr 1fr; align-items: stretch;
+      transition: box-shadow 0.25s, transform 0.25s;
+    }
+    .project-card:hover { box-shadow: 0 16px 48px rgba(90,60,30,0.12); transform: translateY(-3px); }
+    .project-card.flip .project-preview { order: 2; }
+    .project-card.flip .project-info   { order: 1; }
+    @media(max-width:780px){
+      .project-card, .project-card.flip { grid-template-columns: 1fr; }
+      .project-card.flip .project-preview { order: 0; }
+      .project-card.flip .project-info   { order: 0; }
+    }
+
+    /* BROWSER MOCKUP */
+    .project-preview { display: flex; flex-direction: column; min-height: 380px; }
+    .browser-bar {
+      background: var(--cream2); border-bottom: 1px solid var(--tan);
+      padding: 11px 16px; display: flex; align-items: center; gap: 10px; flex-shrink: 0;
+    }
+    .browser-dots { display: flex; gap: 5px; }
+    .browser-dot { width: 10px; height: 10px; border-radius: 50%; }
+    .browser-dot.r { background: #ff5f56; } .browser-dot.y { background: #ffbd2e; } .browser-dot.g { background: #27c93f; }
+    .browser-url {
+      flex: 1; background: var(--white); border: 1px solid var(--tan); border-radius: 4px;
+      padding: 4px 10px; font-size: 10px; color: var(--light); font-family: monospace;
+      white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
+    }
+    .browser-content { flex: 1; overflow: hidden; }
+
+    /* EE mockup */
+    .ee-body {
+      background: linear-gradient(160deg, #0a160e 0%, #1a3a2a 60%, #0a160e 100%);
+      height: 100%; min-height: 320px; padding: 28px 20px;
+      display: flex; flex-direction: column; align-items: center; gap: 10px;
+    }
+    .ee-circle {
+      width: 48px; height: 48px; border-radius: 50%;
+      background: #1a3a2a; border: 2px solid #c9a84c;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 12px; font-weight: 900; color: #c9a84c;
+    }
+    .ee-title { font-size: 15px; font-weight: 800; color: #c9a84c; text-align: center; letter-spacing: 0.04em; line-height: 1.3; }
+    .ee-sub { font-size: 8px; color: rgba(201,168,76,0.42); letter-spacing: 0.22em; text-transform: uppercase; }
+    .ee-rule { width: 44px; height: 1px; background: rgba(201,168,76,0.25); }
+    .ee-copy { font-size: 9px; color: rgba(240,237,232,0.45); text-align: center; line-height: 1.7; max-width: 180px; }
+    .ee-btn { background: #c9a84c; color: #0a160e; font-size: 8px; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; padding: 7px 18px; border-radius: 2px; }
+    .ee-services { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 4px; width: 100%; }
+    .ee-svc { background: rgba(255,255,255,0.04); border: 1px solid rgba(201,168,76,0.08); padding: 8px 5px; text-align: center; }
+    .ee-svc-name { font-size: 7px; color: rgba(240,237,232,0.4); margin-bottom: 3px; }
+    .ee-svc-price { font-size: 12px; font-weight: 700; color: #c9a84c; }
+
+    /* BB mockup */
+    .bb-body {
+      background: linear-gradient(160deg, #1e0e08 0%, #2e1508 60%, #1e0e08 100%);
+      height: 100%; min-height: 320px; padding: 28px 20px;
+      display: flex; flex-direction: column; align-items: center; gap: 10px;
+    }
+    .bb-eyebrow { font-size: 8px; letter-spacing: 0.18em; color: #f5c842; border: 1px solid rgba(245,200,66,0.28); padding: 3px 12px; border-radius: 2px; text-transform: uppercase; }
+    .bb-title { font-size: 24px; font-weight: 900; color: #fff; text-align: center; line-height: 1.1; letter-spacing: -0.01em; }
+    .bb-title em { color: #f5c842; font-style: normal; }
+    .bb-copy { font-size: 9px; color: rgba(255,255,255,0.48); text-align: center; line-height: 1.7; max-width: 200px; }
+    .bb-stats { display: flex; width: 100%; border: 1px solid rgba(255,255,255,0.08); border-radius: 3px; overflow: hidden; }
+    .bb-stat { flex: 1; padding: 7px 4px; text-align: center; border-right: 1px solid rgba(255,255,255,0.08); }
+    .bb-stat:last-child { border-right: none; }
+    .bb-stat .bv { font-size: 10px; font-weight: 700; color: #f5c842; display: block; }
+    .bb-stat .bl { font-size: 6px; color: rgba(255,255,255,0.3); text-transform: uppercase; letter-spacing: 0.05em; }
+    .bb-chips { display: grid; grid-template-columns: 1fr 1fr; gap: 3px; width: 100%; }
+    .bb-chip { background: rgba(184,50,40,0.2); padding: 7px 8px; border-radius: 3px; font-size: 8px; color: rgba(255,255,255,0.65); }
+
+    /* INFO PANEL */
+    .project-info {
+      padding: 48px 44px; display: flex; flex-direction: column; gap: 18px;
+      justify-content: center;
+    }
+    @media(max-width:780px){ .project-info { padding: 32px 28px; } }
+    .project-num { font-size: 11px; font-weight: 600; letter-spacing: 0.12em; text-transform: uppercase; color: var(--light); }
+    .project-name {
+      font-family: 'Lora', Georgia, serif;
+      font-size: clamp(20px, 2.5vw, 28px); font-weight: 700;
+      color: var(--dark); letter-spacing: -0.02em; line-height: 1.2;
+    }
+    .project-client { font-size: 13px; color: var(--mid); margin-top: -8px; }
+    .project-desc { font-size: 15px; color: var(--mid); line-height: 1.8; }
+    .project-features { display: flex; flex-direction: column; gap: 9px; list-style: none; }
+    .project-features li {
+      font-size: 13px; color: var(--mid); display: flex; align-items: flex-start; gap: 10px; line-height: 1.55;
+    }
+    .project-features li::before { content: '·'; color: var(--rust); font-size: 18px; line-height: 1; flex-shrink: 0; margin-top: -1px; }
+    .project-tags { display: flex; flex-wrap: wrap; gap: 7px; }
+    .tag {
+      font-size: 11px; font-weight: 600; padding: 4px 12px; border-radius: 99px;
+      background: var(--cream2); border: 1px solid var(--tan); color: var(--mid);
+    }
+    .project-cta {
+      display: inline-flex; align-items: center; gap: 8px;
+      font-size: 14px; font-weight: 600; color: var(--rust);
+      text-decoration: none; transition: gap 0.2s;
+      border-bottom: 1.5px solid rgba(192,83,42,0.3); padding-bottom: 2px; width: fit-content;
+    }
+    .project-cta:hover { gap: 14px; border-color: var(--rust); }
+
+    /* ABOUT */
+    .about-section { background: var(--cream2); border-top: 1px solid var(--tan); border-bottom: 1px solid var(--tan); }
+    .about-inner { display: grid; grid-template-columns: 280px 1fr; gap: 64px; align-items: center; }
+    @media(max-width:720px){ .about-inner { grid-template-columns: 1fr; gap: 36px; } }
+    .about-card {
+      background: var(--white); border: 1px solid var(--tan); border-radius: 20px;
+      padding: 40px 28px; text-align: center; box-shadow: 0 2px 16px rgba(90,60,30,0.05);
+    }
+    .about-avatar {
+      width: 80px; height: 80px; border-radius: 50%;
+      background: var(--rust); margin: 0 auto 18px;
+      display: flex; align-items: center; justify-content: center;
+      font-family: 'Lora', serif; font-size: 30px; font-weight: 700; color: var(--white);
+    }
+    .about-name { font-family: 'Lora', serif; font-size: 20px; font-weight: 700; color: var(--dark); margin-bottom: 5px; }
+    .about-role { font-size: 13px; color: var(--mid); margin-bottom: 3px; }
+    .about-loc  { font-size: 12px; color: var(--light); }
+    .about-text h2 { text-align: left; }
+    .about-text p { font-size: 15px; color: var(--mid); line-height: 1.82; margin-top: 16px; }
+
+    /* PROCESS */
+    .process-section { }
+    .process-list { margin-top: 48px; display: flex; flex-direction: column; gap: 0; border: 1px solid var(--tan); border-radius: 16px; overflow: hidden; }
+    .process-item {
+      padding: 28px 36px; border-bottom: 1px solid var(--tan);
+      display: grid; grid-template-columns: 48px 1fr; gap: 20px; align-items: start;
+      transition: background 0.2s;
+    }
+    .process-item:last-child { border-bottom: none; }
+    .process-item:hover { background: var(--cream2); }
+    .pi-num {
+      width: 40px; height: 40px; border-radius: 50%; background: var(--rust);
+      display: flex; align-items: center; justify-content: center;
+      font-size: 13px; font-weight: 700; color: var(--white); flex-shrink: 0;
+    }
+    .pi-title { font-size: 16px; font-weight: 600; color: var(--dark); margin-bottom: 6px; }
+    .pi-desc { font-size: 14px; color: var(--mid); line-height: 1.72; }
+
+    /* CONTACT */
+    .contact-section { background: var(--dark); border-top: 1px solid rgba(255,255,255,0.06); }
+    .contact-inner { max-width: 680px; margin: 0 auto; text-align: center; }
+    .contact-inner h2 { color: var(--white); margin-bottom: 16px; }
+    .contact-inner p { font-size: 16px; color: rgba(255,255,255,0.5); line-height: 1.75; margin-bottom: 40px; }
+    .contact-email {
+      display: inline-flex; align-items: center; gap: 12px;
+      font-size: 16px; font-weight: 600; color: var(--dark);
+      background: var(--cream); border-radius: 99px; padding: 16px 40px;
+      text-decoration: none; transition: all 0.2s;
+    }
+    .contact-email:hover { background: var(--white); transform: translateY(-2px); }
+
+    /* FOOTER */
+    footer {
+      background: var(--dark); border-top: 1px solid rgba(255,255,255,0.06);
+      padding: 24px 48px; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 10px;
+    }
+    .footer-brand { font-family: 'Lora', serif; font-size: 14px; font-style: italic; font-weight: 600; color: rgba(255,255,255,0.5); }
+    .footer-copy  { font-size: 12px; color: rgba(255,255,255,0.25); }
+
+    .fade-up { opacity: 0; transform: translateY(22px); transition: opacity 0.65s ease, transform 0.65s ease; }
+    .fade-up.visible { opacity: 1; transform: none; }
+    .delay-1 { transition-delay: 0.1s; }
+    .delay-2 { transition-delay: 0.2s; }
+  </style>
+</head>
+<body>
+
+<nav>
+  <a href="#top" class="nav-brand">Porter<span>.</span>Milloy</a>
+  <ul class="nav-links">
+    <li><a href="#work">Work</a></li>
+    <li><a href="#process">Process</a></li>
+    <li><a href="#about">About</a></li>
+  </ul>
+  <a href="#contact" class="nav-cta">Get in Touch</a>
+</nav>
+
+<!-- HERO -->
+<div class="hero" id="top">
+  <div class="hero-kicker fade-up">Web Developer, Centralia WA</div>
+  <h1 class="fade-up">Websites for <em>local businesses</em> that actually want one</h1>
+  <p class="hero-sub fade-up">
+    I write custom websites for small businesses in Centralia and Lewis County. You get a real site, hand-coded and built around your business, not a template with your logo swapped in.
+  </p>
+  <div class="hero-actions fade-up delay-1">
+    <a href="#work" class="btn btn-rust">See My Work</a>
+    <a href="#about" class="btn btn-ghost">About Me</a>
+  </div>
+</div>
+
+<div class="ornament fade-up">* * *</div>
+
+<!-- WORK -->
+<div class="section" id="work">
+  <div class="section-inner">
+    <div class="section-kicker fade-up">Work</div>
+    <h2 class="fade-up">Projects</h2>
+    <p class="section-desc fade-up">Two sites I built for local Centralia businesses.</p>
+
+    <div class="projects-wrap">
+
+      <!-- EMERALD EDGE -->
+      <div class="project-card fade-up">
+        <div class="project-preview">
+          <div class="browser-bar">
+            <div class="browser-dots"><div class="browser-dot r"></div><div class="browser-dot y"></div><div class="browser-dot g"></div></div>
+            <div class="browser-url">emerald-edge.html</div>
+          </div>
+          <div class="browser-content">
+            <div class="ee-body">
+              <div class="ee-circle">TC</div>
+              <div class="ee-title">Twin Cities<br/>Emerald Edge</div>
+              <div class="ee-sub">Barbershop · Centralia, WA</div>
+              <div class="ee-rule"></div>
+              <div class="ee-copy">Premium cuts, clean fades, and a full grooming experience.</div>
+              <div class="ee-btn">Book Appointment</div>
+              <div class="ee-services">
+                <div class="ee-svc"><div class="ee-svc-name">Fade</div><div class="ee-svc-price">$40</div></div>
+                <div class="ee-svc"><div class="ee-svc-name">Cut + Beard</div><div class="ee-svc-price">$60</div></div>
+                <div class="ee-svc"><div class="ee-svc-name">Full Package</div><div class="ee-svc-price">$100</div></div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="project-info">
+          <div class="project-num">Project 01</div>
+          <div>
+            <div class="project-name">Emerald Edge Barbershop</div>
+            <div class="project-client">Twin Cities Emerald Edge, Centralia WA</div>
+          </div>
+          <p class="project-desc">
+            A new barbershop that needed a site to match the feel of the shop itself. Dark, premium, and focused on getting customers to book. Every service links directly to their Booksy page.
+          </p>
+          <ul class="project-features">
+            <li>Full service menu with pricing and individual Booksy booking links</li>
+            <li>Business hours, cancellation policy, and directions</li>
+            <li>Mobile-friendly with sticky navigation and scroll animations</li>
+          </ul>
+          <div class="project-tags">
+            <span class="tag">HTML</span><span class="tag">CSS</span><span class="tag">Barbershop</span><span class="tag">Booking</span>
+          </div>
+          <a href="businesses/emerald-edge/emerald-edge.html" target="_blank" class="project-cta">
+            View the site
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+          </a>
+        </div>
+      </div>
+
+      <!-- BILL AND BEAS -->
+      <div class="project-card flip fade-up">
+        <div class="project-preview">
+          <div class="browser-bar">
+            <div class="browser-dots"><div class="browser-dot r"></div><div class="browser-dot y"></div><div class="browser-dot g"></div></div>
+            <div class="browser-url">BillAndBeasLatestWebsite.html</div>
+          </div>
+          <div class="browser-content">
+            <div class="bb-body">
+              <div class="bb-eyebrow">Centralia, WA · Est. 1970s</div>
+              <div class="bb-title">Bill &amp; <em>Bea's</em><br/>Drive-In</div>
+              <div class="bb-copy">Burgers, breakfast, espresso, and milkshakes. Over 50 years in Centralia.</div>
+              <div class="bb-stats">
+                <div class="bb-stat"><span class="bv">50+</span><span class="bl">Years</span></div>
+                <div class="bb-stat"><span class="bv">4.7★</span><span class="bl">Google</span></div>
+                <div class="bb-stat"><span class="bv">372</span><span class="bl">Reviews</span></div>
+                <div class="bb-stat"><span class="bv">88%</span><span class="bl">Recommend</span></div>
+              </div>
+              <div class="bb-chips">
+                <div class="bb-chip">🍔 Fresh Burgers</div>
+                <div class="bb-chip">☕ Espresso Bar</div>
+                <div class="bb-chip">🥤 15 Shake Flavors</div>
+                <div class="bb-chip">🚗 Curbside Pickup</div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="project-info">
+          <div class="project-num">Project 02</div>
+          <div>
+            <div class="project-name">Bill &amp; Bea's Drive-In</div>
+            <div class="project-client">Bill &amp; Bea's Drive-In &amp; Espresso, Centralia WA</div>
+          </div>
+          <p class="project-desc">
+            Bill and Bea's has been open since the 1970s. They needed a site that covers everything a customer might want to know: full menu with prices, hours, location, and photos. The warm color palette matches the diner itself.
+          </p>
+          <ul class="project-features">
+            <li>Seven-tab menu covering every category with full pricing</li>
+            <li>Photo gallery, customer reviews, and Google Maps embed</li>
+            <li>Mobile hamburger nav and responsive grid layouts</li>
+          </ul>
+          <div class="project-tags">
+            <span class="tag">HTML</span><span class="tag">CSS</span><span class="tag">Restaurant</span><span class="tag">Gallery</span>
+          </div>
+          <a href="businesses/bill-and-beas/website/BillAndBeasLatestWebsite.html" target="_blank" class="project-cta">
+            View the site
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+          </a>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</div>
+
+<!-- PROCESS -->
+<div class="section process-section" id="process">
+  <div class="section-inner">
+    <div class="section-kicker fade-up">Process</div>
+    <h2 class="fade-up">How it works</h2>
+    <p class="section-desc fade-up">Four steps from first conversation to finished site.</p>
+    <div class="process-list fade-up">
+      <div class="process-item">
+        <div class="pi-num">1</div>
+        <div>
+          <div class="pi-title">We talk</div>
+          <p class="pi-desc">I want to know about your business, your customers, and what you actually need the site to do. This part usually takes about 30 minutes.</p>
+        </div>
+      </div>
+      <div class="process-item">
+        <div class="pi-num">2</div>
+        <div>
+          <div class="pi-title">I design</div>
+          <p class="pi-desc">I put together a design built around your business. Colors, fonts, and structure that fit what you do, not a generic layout I pulled off the shelf.</p>
+        </div>
+      </div>
+      <div class="process-item">
+        <div class="pi-num">3</div>
+        <div>
+          <div class="pi-title">I build it</div>
+          <p class="pi-desc">Hand-coded HTML and CSS. It loads fast, looks right on every screen, and you actually own the files when we're done.</p>
+        </div>
+      </div>
+      <div class="process-item">
+        <div class="pi-num">4</div>
+        <div>
+          <div class="pi-title">You get it</div>
+          <p class="pi-desc">I walk you through the finished site, answer your questions, and help you get it online. No mystery, no ongoing dependency on me.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ABOUT -->
+<div class="section about-section" id="about">
+  <div class="section-inner">
+    <div class="about-inner">
+      <div class="about-card fade-up">
+        <div class="about-avatar">P</div>
+        <div class="about-name">Porter Milloy</div>
+        <div class="about-role">Web Developer</div>
+        <div class="about-loc">Centralia, WA</div>
+      </div>
+      <div class="about-text fade-up delay-1">
+        <div class="section-kicker">About</div>
+        <h2>Who I am</h2>
+        <p>I'm Porter, a web developer from Centralia. I started building websites for local businesses after noticing that a lot of good businesses in this area either had no website or one that didn't do them justice.</p>
+        <p>I write every site by hand. No drag-and-drop builders, no templates, no monthly platform fees. You get a custom site and the actual files to go with it.</p>
+        <p>I work with businesses in Lewis County because that's home. I want to see the places here do well.</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- CONTACT -->
+<div class="section contact-section" id="contact">
+  <div class="section-inner">
+    <div class="contact-inner">
+      <div class="section-kicker fade-up" style="color:rgba(255,255,255,0.4); justify-content:center;">Contact</div>
+      <h2 class="fade-up">Want a website?</h2>
+      <p class="fade-up">Send me an email. Tell me about your business and what you're thinking. We'll go from there.</p>
+      <a href="mailto:milloyporter@gmail.com" class="contact-email fade-up">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"/></svg>
+        milloyporter@gmail.com
+      </a>
+    </div>
+  </div>
+</div>
+
+<footer>
+  <div class="footer-brand">Porter Milloy</div>
+  <div class="footer-copy">2026 · Centralia, WA</div>
+</footer>
+
+<script>
+  const obs = new IntersectionObserver(entries => {
+    entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); });
+  }, { threshold: 0.07 });
+  document.querySelectorAll('.fade-up').forEach(el => obs.observe(el));
+</script>
+</body>
+</html>
