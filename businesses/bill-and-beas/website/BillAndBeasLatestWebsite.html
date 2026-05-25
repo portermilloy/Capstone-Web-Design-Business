@@ -69,7 +69,7 @@ section{padding:6rem 1.5rem;}
 .about-text p:last-of-type{margin-bottom:0;}
 .about-img{position:relative;}
 .about-img img{width:100%;border-radius:4px;display:block;}
-.about-img-badge{position:absolute;bottom:-1.5rem;right:-1.5rem;background:var(--red);color:white;padding:1.2rem;text-align:center;border-radius:3px;font-family:Arial,sans-serif;}
+.about-img-badge{position:absolute;bottom:-1.5rem;right:0.75rem;background:var(--red);color:white;padding:1.2rem;text-align:center;border-radius:3px;font-family:Arial,sans-serif;}
 .about-img-badge .badge-num{font-size:2rem;font-weight:bold;display:block;line-height:1;}
 .about-img-badge .badge-text{font-size:0.7rem;text-transform:uppercase;letter-spacing:1px;opacity:0.9;}
 .about-stats{display:flex;gap:0;margin-top:2.5rem;border:1px solid var(--tan-dark);border-radius:4px;overflow:hidden;}
@@ -96,7 +96,7 @@ section{padding:6rem 1.5rem;}
 
 /* MENU */
 .menu{background:var(--white);}
-.menu-tabs{display:flex;gap:0;justify-content:center;margin-bottom:3rem;border:1px solid var(--tan-dark);border-radius:3px;overflow:hidden;max-width:800px;margin-left:auto;margin-right:auto;margin-bottom:3rem;}
+.menu-tabs{display:flex;gap:0;justify-content:center;border:1px solid var(--tan-dark);border-radius:3px;overflow:hidden;max-width:800px;margin:0 auto 3rem;}
 .tab-btn{flex:1;background:transparent;border:none;border-right:1px solid var(--tan-dark);color:var(--text-muted);padding:0.7rem 0.5rem;font-family:Arial,sans-serif;font-size:0.8rem;cursor:pointer;transition:all 0.15s;text-transform:uppercase;letter-spacing:0.5px;}
 .tab-btn:last-child{border-right:none;}
 .tab-btn.active,.tab-btn:hover{background:var(--red);color:white;}
@@ -244,8 +244,8 @@ footer a:hover{color:rgba(255,255,255,0.6);}
     </div>
     <div class="hero-stats">
       <div class="hero-stat"><span class="num">50+</span><span class="label">Years Open</span></div>
-      <div class="hero-stat"><span class="num">4.7★</span><span class="label">Google Rating</span></div>
-      <div class="hero-stat"><span class="num">372</span><span class="label">Reviews</span></div>
+      <div class="hero-stat"><span class="num">4.5★</span><span class="label">Google Rating</span></div>
+      <div class="hero-stat"><span class="num">4.7★</span><span class="label">Facebook Rating</span></div>
       <div class="hero-stat"><span class="num">88%</span><span class="label">Recommend</span></div>
     </div>
   </div>
@@ -290,8 +290,8 @@ footer a:hover{color:rgba(255,255,255,0.6);}
       <p>We're not a chain. We're your neighbor.</p>
       <div class="about-stats">
         <div class="astat"><span class="astat-num">50+</span><span class="astat-label">Years Serving Centralia</span></div>
-        <div class="astat"><span class="astat-num">4.7★</span><span class="astat-label">Google Rating</span></div>
-        <div class="astat"><span class="astat-num">372</span><span class="astat-label">Customer Reviews</span></div>
+        <div class="astat"><span class="astat-num">4.5★</span><span class="astat-label">Google Rating</span></div>
+        <div class="astat"><span class="astat-num">1,582</span><span class="astat-label">Google Reviews</span></div>
       </div>
     </div>
     <div class="about-img">
@@ -579,7 +579,7 @@ footer a:hover{color:rgba(255,255,255,0.6);}
 <section class="reviews" id="reviews">
   <div class="section-label">What People Say</div>
   <h2 class="section-title">Loved by Centralia</h2>
-  <p class="section-sub">4.5 stars on Google · 88% recommend on Facebook · 2,000 reviews</p>
+  <p class="section-sub">4.5 stars · 1,582 Google reviews · 88% recommend on Facebook</p>
   <div class="reviews-grid">
     <div class="review-card">
       <div class="review-stars">★★★★★</div>
@@ -615,6 +615,15 @@ footer a:hover{color:rgba(255,255,255,0.6);}
 </footer>
 
 <script>
+  (function() {
+    const days = ['Sunday','Monday','Tuesday','Wednesday','Thursday','Friday','Saturday'];
+    const today = days[new Date().getDay()];
+    document.querySelectorAll('.hours-row').forEach(row => {
+      const dayEl = row.querySelector('.day');
+      if (dayEl && dayEl.textContent === today) row.classList.add('today');
+    });
+  })();
+
   function showTab(id, btn) {
     document.querySelectorAll('.menu-panel').forEach(p => p.classList.remove('active'));
     document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
