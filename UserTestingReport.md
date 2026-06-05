@@ -100,12 +100,12 @@
 ### Emerald Edge Barber Shop
 - [ ] Add storefront photo prominently near the top
 - [ ] Source and add more photos throughout the site
-- [ ] Review and fix Google Maps embed
+- [ ] Review and fix Google Maps embed (currently a link-out placeholder, no embed)
 
 ### Milloy Web Studio Portfolio
-- [ ] Fix text blending in description section — improve spacing and contrast
-- [ ] Fix bugged client site images
-- [ ] Fix broken email link
-- [ ] Add contact form or contact section
-- [ ] Improve wording throughout description sections
-- [ ] Fix text spacing throughout
+- [x] Fix text blending in description section — improved spacing and contrast
+- [x] Fix bugged client site images — fixed broken link to Bill and Bea's site
+- [x] Fix broken email link — mailto link working correctly
+- [x] Add contact form or contact section — full contact section added
+- [x] Improve wording throughout description sections — copy revised to be plain and direct
+- [x] Fix text spacing throughout
