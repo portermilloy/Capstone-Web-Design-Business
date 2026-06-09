@@ -45,7 +45,7 @@
       text-decoration: none; transition: background 0.15s;
     }
     .nav-cta:hover { background: var(--rust2); }
-    @media(max-width:680px){ nav { padding: 0 20px; } .nav-links { display: none; } }
+    @media(max-width:680px){ nav { padding: 0 20px; } .nav-links { display: none; } footer { padding: 24px 20px; } }
 
     /* HERO */
     .hero {
@@ -91,6 +91,7 @@
       color: var(--rust); margin-bottom: 12px; display: flex; align-items: center; gap: 12px;
     }
     .section-kicker::before { content: ''; width: 24px; height: 1.5px; background: var(--rust); display: block; flex-shrink: 0; }
+    .contact-inner .section-kicker::before { background: rgba(255,255,255,0.3); }
     h2 {
       font-family: 'Lora', Georgia, serif;
       font-size: clamp(28px, 4vw, 48px); font-weight: 700;
@@ -156,7 +157,8 @@
 
     /* BB mockup */
     .bb-body {
-      background: linear-gradient(160deg, #1e0e08 0%, #2e1508 60%, #1e0e08 100%);
+      background: linear-gradient(rgba(20,8,3,0.62), rgba(20,8,3,0.62)),
+                  url('businesses/bill-and-beas/pictures/Outside_BillandBeas.webp') center/cover no-repeat;
       height: 100%; min-height: 320px; padding: 28px 20px;
       display: flex; flex-direction: column; align-items: center; gap: 10px;
     }
@@ -207,7 +209,7 @@
     /* ABOUT */
     .about-section { background: var(--cream2); border-top: 1px solid var(--tan); border-bottom: 1px solid var(--tan); }
     .about-inner { display: grid; grid-template-columns: 280px 1fr; gap: 64px; align-items: center; }
-    @media(max-width:720px){ .about-inner { grid-template-columns: 1fr; gap: 36px; } }
+    @media(max-width:780px){ .about-inner { grid-template-columns: 1fr; gap: 36px; } }
     .about-card {
       background: var(--white); border: 1px solid var(--tan); border-radius: 20px;
       padding: 40px 28px; text-align: center; box-shadow: 0 2px 16px rgba(90,60,30,0.05);
@@ -246,7 +248,7 @@
     .contact-section { background: var(--dark); border-top: 1px solid rgba(255,255,255,0.06); }
     .contact-inner { max-width: 680px; margin: 0 auto; text-align: center; }
     .contact-inner h2 { color: var(--white); margin-bottom: 16px; }
-    .contact-inner p { font-size: 16px; color: rgba(255,255,255,0.5); line-height: 1.75; margin-bottom: 40px; }
+    .contact-inner p { font-size: 16px; color: rgba(255,255,255,0.72); line-height: 1.75; margin-bottom: 40px; }
     .contact-email {
       display: inline-flex; align-items: center; gap: 12px;
       font-size: 16px; font-weight: 600; color: var(--dark);
@@ -471,7 +473,7 @@
 <div class="section contact-section" id="contact">
   <div class="section-inner">
     <div class="contact-inner">
-      <div class="section-kicker fade-up" style="color:rgba(255,255,255,0.4); justify-content:center;">Contact</div>
+      <div class="section-kicker fade-up" style="color:rgba(255,255,255,0.6); justify-content:center;">Contact</div>
       <h2 class="fade-up">Want a website?</h2>
       <p class="fade-up">Send me an email. Tell me about your business and what you're thinking. We'll go from there.</p>
       <a href="mailto:milloyporter@gmail.com" class="contact-email fade-up">
